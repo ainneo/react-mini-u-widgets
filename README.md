@@ -68,3 +68,18 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Styles 
+No additonal css needed, only add classes to the HTML markup - add classes via Sematic UI DOCs
+
+Created styles using Sematic UI. Use CDN: https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css
+
+You can run a search for other Sematic UI CDNs here: https://cdnjs.com/libraries/semantic-ui and read documentations here: https://semantic-ui.com/
+
+
+### About This Project:
+This is a fun mini app of 4 widgets, an accordian, search bar, translator, and drop down menu. None of these widgets are related. The reason all the widgets are in the same app is so we don't have to generate CRA template over and over again. 
+
+The project teaches hooks, state, props, and how to create them from scratch.
+
+

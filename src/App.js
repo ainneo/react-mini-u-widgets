@@ -1,25 +1,22 @@
-import logo from './logo.svg';
+import Accordion from './components/Accordion'
+import Search from './components/Search'
 import './App.css';
+ 
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+export default () => {
+//this is an static array we created, it will not change over time
+const questionsArr = [
+  {title:'What is the questionsArr?', content:'it is a static array we created - will not change'},
+  {title:'How do we pass questionsArr down as props?', content:'We add items={questionsArr} to the Accordion instance'},
+  {title:'What function can we use to add props to the UI?', content:'We can use the map function'},
+];
+
+  return(
+    <div>
+      <br/>
+      {/* <Accordion items={questionsArr}/> */}
+      <Search />
     </div>
-  );
+  )
 }
 
-export default App;
