@@ -2,11 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Search = () => {
+  //search term hook
   const [term, setTerm] = useState('');
+  //results hook - to print out to the DOM
+  //unpack data using destructing asignment in the axios call
+  //pass data into setResults
+  const [results, setResults] = useState([]);
+
 
   useEffect(() => {
     const search = async () => {
-      await axios.get('https://en.wikipedia.org/w/api.php', {
+      const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
         params: {
           action: 'query',
           list: 'search',
@@ -15,23 +21,44 @@ const Search = () => {
           srsearch: term,
         },
       });
+      setResults(data.query.search);
+      console.log(data)
+    };
+    //set default term w/if condtion, otherwise an error occurs
+    //if term is an empty string, do not search
+    //if term has input,  do a search
+    if(term){
+      search()
     };
 
-    search();
   }, [term]);
+
+
+  const renderedResults = results.map(result=>{
+    return(
+      <div key ={result.pageid} className="item">
+        <div className="content">
+          <div className="header">{result.title}</div>
+          <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
+        </div>
+      </div>
+    )
+  });
+
 
   return (
     <div>
       <div className="ui form">
         <div className="field">
-          <label>Enter Search Term Testing Terms - Remove Later</label>
+          <label>Enter Search Term</label>
           <input
             value={term}
             onChange={(e) => setTerm(e.target.value)}
             className="input"
-          />
+          />  
         </div>
       </div>
+      <div className="ui celled list">{renderedResults}</div>
     </div>
   );
 };
@@ -70,4 +97,8 @@ export default Search;
 //for more: https://www.mediawiki.org/wiki/API:Main_page
 // orignal http: https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&origin=*&srsearch=programming
 
-
+// #159
+// <span dangerouslySetInnerHTML={{ __html: result.snippet}}></span>
+// get rid of span tags inside objects that display on the DOM
+// make sure there is no space tag between the span tags... or you will get an error message
+// PROBLEM IS it can be hacked - SO DO NOT USE THIS!!!
