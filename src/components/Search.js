@@ -22,27 +22,40 @@ const Search = () => {
         },
       });
       setResults(data.query.search);
-      console.log(data)
+      // console.log(data)
     };
     //set default term w/if condtion, otherwise an error occurs
     //if term is an empty string, do not search
     //if term has input,  do a search
-    if(term){
-      search()
-    };
+    //wrap with setTimeout func to prevent api throtting/ use clearTimeout to reset time after keypress
+    const timeoutId = setTimeout( ()=> {
+      if(term){
+        search()
+      };
+    }, 500);
+    //resets after input
+    return ()=> {
+      return clearTimeout(timeoutId);
+    }
 
   }, [term]);
 
 
-  const renderedResults = results.map(result=>{
-    return(
+  let renderedResults = results.map(result=>{
+   
+    return term? (
       <div key ={result.pageid} className="item">
+        <div className="right floated content">
+          <a className="ui button" 
+             href={`http://en.wikipedia.org?curid=${result.pageid}`}>read more</a>
+        </div>
         <div className="content">
           <div className="header">{result.title}</div>
           <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
         </div>
       </div>
-    )
+    ):(console.log("no results on page"))
+
   });
 
 
@@ -97,8 +110,22 @@ export default Search;
 //for more: https://www.mediawiki.org/wiki/API:Main_page
 // orignal http: https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&origin=*&srsearch=programming
 
-// #159
+
 // <span dangerouslySetInnerHTML={{ __html: result.snippet}}></span>
 // get rid of span tags inside objects that display on the DOM
 // make sure there is no space tag between the span tags... or you will get an error message
-// PROBLEM IS it can be hacked - SO DO NOT USE THIS!!!
+// PROBLEM IS it can be hacked - SO DO NOT USE
+
+
+
+//API Throtting
+//prevent an api request each time the user key presses in the input box
+//use the setTimeout and clearTimeout functions to set and reset time after inputs
+
+// input- set timer to search 500ms
+// input- cancel previous timer
+// input- set timer to search 500ms
+// input- cancel previous timer
+// no changes- last timer excutes
+
+//wrap the search function with a setTimeout function

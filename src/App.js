@@ -4,7 +4,7 @@ import './App.css';
  
 
 const App = _=> {
-//this is an static array we created, it will not change over time
+// this is an static array we created, it will not change over time
 // const questionsArr = [
 //   {title:'What is the questionsArr?', content:'it is a static array we created - will not change'},
 //   {title:'How do we pass questionsArr down as props?', content:'We add items={questionsArr} to the Accordion instance'},

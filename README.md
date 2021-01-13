@@ -40,10 +40,11 @@ You can run a search for other Sematic UI CDNs here: https://cdnjs.com/libraries
 This is a fun mini app of 4 widgets, an accordian, search bar, translator, and drop down menu. None of these widgets are related. The reason all the widgets are in the same app is so we don't have to generate CRA template over and over again for each widget
 
 ### API CALL
-API call is made with axios. Install via CLI:
+API call for search wiki is made with axios. Install via CLI:
 ``` npm install axios ```
 Read wiki docs for more info: https://www.mediawiki.org/wiki/API:Main_page
 Orignal url with root end point and parameters: https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&origin=*&srsearch=programming
+
 
 
 
