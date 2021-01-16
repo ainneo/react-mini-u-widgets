@@ -2,24 +2,26 @@ import React, { useState } from 'react';
 
 const Accordion = ({ items }) => {
 
-    //hooks - function to init a new pc of state
+    //state hooks
     const [activeIndex, setActiveIndex] = useState(null);
 
-    //helper function - onClick method
+    //helper - toggle function
+    //if activeindex strict equal to an index set it null else set it to index
     const onTitleClick = (index) => {
         // console.log('click', index)//test
-        setActiveIndex(index)
+        // setActiveIndex(index)
+        setActiveIndex(activeIndex === index ? null : index);
     };
 
-    //mapping function
+    //mapping data into UI
     const renderedItems = items.map((item, index) => {
-        //js condtional statement
-        //if index is equal to the activeIndex, then open that index else return empty string
-        const open = index === activeIndex? 'active' : "";
 
+        //if index is equal to the activeIndex, then open that index else return empty string
+        const open = index === activeIndex? 'active' : '';
+        
         return (
-            <React.Fragment key={item.title}>
-                <div className={`title ${open}`} onClick={_ => onTitleClick(index)}>
+            <React.Fragment key={index}>
+                <div className="title" onClick={_ => onTitleClick(index)}>
                     <i className="dropdown icon"></i>
                     {item.title}
                 </div>
@@ -39,7 +41,10 @@ const Accordion = ({ items }) => {
 export default Accordion
 
 
-
+//**** how to toggle - open and close
+//onClick sets off index to go to two places...
+//toggle funtion - sets all indexes to close (null)
+//map function's open condtion variable - keeps the slected function active and open
 
 //*** Notes
 
