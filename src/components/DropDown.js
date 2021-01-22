@@ -1,69 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 
+const Dropdown = ({ options, selected, onSelectedChange }) => {
 
-const DropDown = ( {colors, selection, onSelectedChange} )=>{
-    //state to toggle open or close the dropdown
-    const  [open, setOpen] = useState(false)
+  //state - open and close drop down
+  const [open, setOpen] = useState(false);
+  //state to help with closing dropdown when clicking on the DOM
+  const ref = useRef();
+ 
+  //closing the dropdown when click outside of drop down
+  //we use useEffect when creating side efffects... like DOM muniplation
+  useEffect(() => {
+    document.body.addEventListener('click', (event) => {
+      if (ref.current.contains(event.target)) {
+        return;
+      }
+      setOpen(false);
+    });
+  }, []);
 
+ //mapping data into UI
+  const renderedOptions = options.map((option) => {
+    if (option.value === selected.value) {
+      return null;
+    }
 
-        //helper map function - we are mapping data into UI
-        const renderedOptions = colors.map((color) => {
-            return(
-                <div key={color.value} 
-                     className="item"
-                     onClick={()=> onSelectedChange(color)}
-                     >
-                    {color.value}
-                </div>
-            )
-        })
+    return (
+      <div
+        key={option.value}
+        className="item"
+        onClick={() => onSelectedChange(option)}
+      >
+        {option.label}
+      </div>
+    );
+  });
 
-    //UI
-    return(
-        <div className="ui form">
-            <div className=" feild">
-              <label className="label">Select a Color</label>
-              <div 
-              onClick={()=>setOpen(!open)} 
-              className={`ui selection dropdown ${open ? 'visible active':''}`}
-              >
-              <i className="dropdown icon"></i>
-                 <div className="text">{selection.label}</div>
-                 <div className={`menu ${open ? 'visible transition':''}`}> { renderedOptions }</div>
-              </div>
-
-            </div>
+ // main UI component
+  return (
+    <div ref={ref} className="ui form">
+      <div className="field">
+        <label className="label">Select a Color</label>
+        <div
+          onClick={() => setOpen(!open)}
+          className={`ui selection dropdown ${open ? 'visible active' : ''}`}
+        >
+          <i className="dropdown icon"></i>
+          <div className="text">{selected.label}</div>
+          <div className={`menu ${open ? 'visible transition' : ''}`}>
+            {renderedOptions}
+          </div>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default DropDown
-
-
+export default Dropdown;
 
 
 //notes:
-//helper map function to map in data
+//helper function to map in data
 // - data
 // - selection state
 // - setter - hooks setter funtion
 
 //UI 
-//passing in map variable to pass in the data...
+//passing in map variable to pass in the data...  {renderedOptions}
 
+//Event Bubbeling:
+//We have 3 events, 1 listner and 2 handelers
+//**** trickey **** All eventlisterners will get called before the event handelers no matter where they are
+//useRef helps solver this problem, see how it is use above
 
-//Orignal active classes/before removing to open and close
-//I removed visible active and visible transition hiding dropdown...
-            // <div className=" feild">
-            //   <label className="label">Select a Color</label>
-            //   <div className="ui selection dropdown visible active">
-            //   <i className="dropdown icon"></i>
-            //      <div className="text">{selection.label}</div>
-            //      <div className="menu visible transition"> { renderedOptions }</div>
-            //   </div>
-            // </div>
-
-//we want to toggle the classes and not hide them
-//we can add a new pc of state to a boolean, open true, closed false
+//Logic:
+//1. on click open drop down - open state
+//2. on click select from menu - selection state
+//2a selection appear on label - selection state
+//2b drop down to close after the selection - selction state
+//PART TWO:
+//3. click outside menu and close dropdown - event listner, DOM, useEffect, useRef, open state
         

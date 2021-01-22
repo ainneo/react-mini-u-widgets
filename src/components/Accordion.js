@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-const Accordion = ({ items }) => {
 
+const Accordion = ({ items }) => {
     //state hooks
     const [activeIndex, setActiveIndex] = useState(null);
 
@@ -13,12 +13,13 @@ const Accordion = ({ items }) => {
         setActiveIndex(activeIndex === index ? null : index);
     };
 
+
     //mapping data into UI
     const renderedItems = items.map((item, index) => {
-
         //if index is equal to the activeIndex, then open that index else return empty string
+        //opens answers
         const open = index === activeIndex? 'active' : '';
-        
+
         return (
             <React.Fragment key={index}>
                 <div className="title" onClick={_ => onTitleClick(index)}>
