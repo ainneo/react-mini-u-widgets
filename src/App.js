@@ -3,7 +3,7 @@
 // import DropDown from './components/DropDown'
 import Translator from './components/Translator'
 import './App.css';
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
  
 
 const App = _=> {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 
-const Dropdown = ({ options, selected, onSelectedChange }) => {
+const Dropdown = ({ label, options,  /*selected*/ language, onSetLanguage }) => {
 
   //state - open and close drop down
   const [open, setOpen] = useState(false);
@@ -21,7 +21,7 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
 
  //mapping data into UI
   const renderedOptions = options.map((option) => {
-    if (option.value === selected.value) {
+    if (option.value ===  /*selected*/ language.value) {
       return null;
     }
 
@@ -29,7 +29,7 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
       <div
         key={option.value}
         className="item"
-        onClick={() => onSelectedChange(option)}
+        onClick={() => onSetLanguage(option)}
       >
         {option.label}
       </div>
@@ -40,13 +40,13 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
   return (
     <div ref={ref} className="ui form">
       <div className="field">
-        <label className="label">Select a Color</label>
+        <label className="label">{label}</label>
         <div
           onClick={() => setOpen(!open)}
           className={`ui selection dropdown ${open ? 'visible active' : ''}`}
         >
           <i className="dropdown icon"></i>
-          <div className="text">{selected.label}</div>
+          <div className="text">{ /*selected*/ language.label}</div>
           <div className={`menu ${open ? 'visible transition' : ''}`}>
             {renderedOptions}
           </div>
