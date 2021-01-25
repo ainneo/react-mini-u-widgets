@@ -36,6 +36,7 @@ Created styles using Sematic UI. Use CDN: https://cdnjs.cloudflare.com/ajax/libs
 You can run a search for other Sematic UI CDNs here: https://cdnjs.com/libraries/semantic-ui and read documentations here: https://semantic-ui.com/
 
 
+
 ### About This Project:
 This is a fun mini app of 4 widgets, an accordian, search bar, translator, and drop down menu. None of these widgets are related. The reason all the widgets are in the same app is so we don't have to generate CRA template over and over again for each widget
 
@@ -45,6 +46,7 @@ API call for search wiki is made with axios. Install via CLI:
 Read wiki docs for more info: https://www.mediawiki.org/wiki/API:Main_page
 Orignal url with root end point and parameters: https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&origin=*&srsearch=programming
 
+API THROTTING: use a setTimeOut function - see example in the search and translator widegets.
 
 
 

@@ -5,7 +5,7 @@ const Accordion = ({ items }) => {
     //state hooks
     const [activeIndex, setActiveIndex] = useState(null);
 
-    //helper - toggle function
+    //helper func - toggle function
     //if activeindex strict equal to an index set it null else set it to index
     const onTitleClick = (index) => {
         // console.log('click', index)//test

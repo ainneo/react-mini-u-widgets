@@ -15,7 +15,11 @@ const options = [
     {
     label:'Hindi',
     value: 'hi'
-    }
+    },
+    {
+        label:'Korean',
+        value: 'ko'
+        }
 ];
 
 const Translator = () =>{
@@ -24,6 +28,7 @@ const Translator = () =>{
     const [language, setlanguage] = useState(options[0]);
     //state of input text
     const [text, setText] = useState('');
+  
 
     //UI
     return(
@@ -40,7 +45,7 @@ const Translator = () =>{
           <Dropdown
             label= "Select a language"
             options={options}
-            language={language}
+            languages={language}
             onSetLanguage={setlanguage}
           />
           <hr />

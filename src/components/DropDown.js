@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 
-const Dropdown = ({ label, options,  /*selected*/ language, onSetLanguage }) => {
+const Dropdown = ({ label, options,  /*selected*/ languages, onSetLanguage }) => {
 
   //state - open and close drop down
   const [open, setOpen] = useState(false);
@@ -21,7 +21,7 @@ const Dropdown = ({ label, options,  /*selected*/ language, onSetLanguage }) => 
 
  //mapping data into UI
   const renderedOptions = options.map((option) => {
-    if (option.value ===  /*selected*/ language.value) {
+    if (option.value ===  /*selected*/ languages.value) {
       return null;
     }
 
@@ -46,7 +46,7 @@ const Dropdown = ({ label, options,  /*selected*/ language, onSetLanguage }) => 
           className={`ui selection dropdown ${open ? 'visible active' : ''}`}
         >
           <i className="dropdown icon"></i>
-          <div className="text">{ /*selected*/ language.label}</div>
+          <div className="text">{ /*selected*/ languages.label}</div>
           <div className={`menu ${open ? 'visible transition' : ''}`}>
             {renderedOptions}
           </div>
@@ -59,11 +59,6 @@ const Dropdown = ({ label, options,  /*selected*/ language, onSetLanguage }) => 
 export default Dropdown;
 
 
-//notes:
-//helper function to map in data
-// - data
-// - selection state
-// - setter - hooks setter funtion
 
 //UI 
 //passing in map variable to pass in the data...  {renderedOptions}

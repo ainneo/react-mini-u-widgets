@@ -33,7 +33,7 @@ const Search = () => {
         search()
       };
     }, 500);
-    //resets after input
+    //resets timer after input
     return ()=> {
       return clearTimeout(timeoutId);
     }
@@ -122,10 +122,12 @@ export default Search;
 //prevent an api request each time the user key presses in the input box
 //use the setTimeout and clearTimeout functions to set and reset time after inputs
 
+//wrap the search function with a setTimeout function
+
+//Process of  setTimeout
 // input- set timer to search 500ms
 // input- cancel previous timer
 // input- set timer to search 500ms
 // input- cancel previous timer
 // no changes- last timer excutes
 
-//wrap the search function with a setTimeout function
