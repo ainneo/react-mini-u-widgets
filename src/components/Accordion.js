@@ -22,6 +22,7 @@ const Accordion = ({ items }) => {
 
         return (
             <React.Fragment key={index}>
+                
                 <div className="title" onClick={_ => onTitleClick(index)}>
                     <i className="dropdown icon"></i>
                     {item.title}
@@ -29,14 +30,19 @@ const Accordion = ({ items }) => {
                 <div className={`content ${open}`}>
                     <p>{item.content}</p>
                 </div>
+            
             </React.Fragment>
         )
     });
 
     //JSX render
-    return <div className="ui styled accordion">
+
+    return (
+    <div className="ui container">
+    <div className="ui styled accordion">
         {renderedItems}
         </div>
+        </div>)
 }
 
 export default Accordion

@@ -48,6 +48,18 @@ Orignal url with root end point and parameters: https://en.wikipedia.org/w/api.p
 
 API THROTTING: use a setTimeOut function - see example in the search and translator widegets.
 
+### Navagation widget
+React Router library is the standered for implementing navagation, but it is not used with this wideget, This widget is more about learning to build navagation ideas and theory from scratch.
+React Router has freqent breaking changes... it is always changing and being updated, so you will have to re-learn it over and over again...so far now, I left React Router out, and will create another project just for it on it's own.
+
+Use window.location in the console to locate the pathname.
+- Edit the URL with a pathname
+- Then in the console use window.location to locate the pathname
+
+### Navagation issues & fixes:
+Make sure pages making API calls is not reloading an entire index.html 
+file each time you click a link, check the network tab in your console
+The ideal fix:
 
 
 

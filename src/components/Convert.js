@@ -6,14 +6,27 @@ const Convert = ( {languages, texts}) => {
     //state translated conversion
     const [translated, setTranslated] = useState('');
     //state to debounce translation
-    const [debouncedText, setdebouncedText] = useState('texts')
+    const [debouncedText, setdebouncedText] = useState('')
+
+
+    //useEffect hook for debouncing translation
+    //throttel the output translation
+    useEffect(() => {
+        const timerId = setTimeout(()=>{
+            setdebouncedText(texts)
+        }, 500);
+        //reset timer after input
+        return () => {
+            return clearTimeout(timerId)
+        };
+    }, [texts]);
   
 
     useEffect(() => {
        const translate = async () => {
            const { data } = await axios.post('https://translation.googleapis.com/language/translate/v2', {}, {
            params: {
-               q: debouncedText, /*texts*/
+               q: debouncedText,
                target: languages.value,
                key: 'AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM'
            }
@@ -31,21 +44,8 @@ const Convert = ( {languages, texts}) => {
     //    return clearTimeout(timeoutInput);
     //  };
     translate();
-    }, [languages, debouncedText/*texts*/]);
-
-    //useEffect hook for debouncing translation
-    //throttel the output translation
-    useEffect(() => {
-        const timerId = setTimeout(()=>{
-            setdebouncedText(texts)
-        }, 500);
-        //reset timer after input
-        return () => {
-            return clearTimeout(timerId)
-        };
-    }, [texts]);
+    }, [languages, debouncedText]);
  
-    
     return(
         <div>
             {translated}
@@ -75,10 +75,11 @@ export default Convert
 //*** use this query to set the translated in the tab */
   
 
-// Debouncing Translation Updates:
+// Debouncing Translation Outputs:
 // create a debounced state - states of translation
 // use that state in a second useEffect function to throttle the translation output
 // use a setTimeout function and a reset timer function
-// *** debounced state's init state is set to texts, so update texts to debouncedText accordinly
+// *** debounced state's init state is set to texts, so update the useEffect texts to
+  
 
 

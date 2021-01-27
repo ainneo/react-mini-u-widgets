@@ -1,56 +1,53 @@
-// import Accordion from './components/Accordion'
-// import Search from './components/Search'
-// import DropDown from './components/DropDown'
-import Translator from './components/Translator'
+import Accordion from './components/Accordion';
+import Search from './components/Search';
+import DropDown from './components/DropDown';
+import Translator from './components/Translator';
+import Route from './components/Route';
+import Header from './components/Header';
 import './App.css';
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
  
 
 const App = _=> {
-// this is an static array we created, it will not change over time
-// const questionsArr = [
-//   {title:'What is the questionsArr?', content:'it is a static array we created - will not change'},
-//   {title:'How do we pass questionsArr down as props?', content:'We add items={questionsArr} to the Accordion instance'},
-//   {title:'What function can we use to add props to the UI?', content:'We can use the map function'},
-// ];
-// const questionsArr2 = [
-//   {title:'test?', content:'it is a static array we created - will not change'},
-//   {title:'test?', content:'We add items={questionsArr} to the Accordion instance'},
-//   {title:'test', content:'We can use the map function'},
-// ];
+// questions array
+const questionsArr = [
+  {title:'What is the questionsArr?', content:'it is a static array we created - will not change'},
+  {title:'How do we pass questionsArr down as props?', content:'We add items={questionsArr} to the Accordion instance'},
+  {title:'What function can we use to add props to the UI?', content:'We can use the map function'},
+];
 
-//color data
-// const options = [
-//   {
-//     label: 'The Color Red',
-//     value: 'red'
-//   },
-//   {
-//     label: 'The Color Blue',
-//     value: 'blue'
-//   },  
-//   {
-//     label: 'The Color Green',
-//     value: 'green'
-//   }
-// ];
+//color array
+const options = [
+  {
+    label: 'The Color Red',
+    value: 'red'
+  },
+  {
+    label: 'The Color Blue',
+    value: 'blue'
+  },  
+  {
+    label: 'The Color Green',
+    value: 'green'
+  }
+];
 
-//state to show the selection in the label
-// const [selected, setSelected] = useState(options[0]);
+//color state to show the selection in the label
+const [selected, setSelected] = useState(options[0]);
 
   return(
     <div>
-      <br/>
-      {/* <Accordion items={questionsArr}/>
-      <Accordion items={questionsArr2}/>
-      <Search />
-      <Search /> */}
-      {/* <DropDown
-        selected={selected}
-        onSelectedChange={setSelected}
-        options={options}
-      /> */}
-      <Translator />
+      <Header />
+      <Route path="/accordion"><Accordion items={questionsArr}/></Route>
+      <Route path="/dropdown">
+        <DropDown
+         label= "select a color"
+         selected={selected}
+         onSelectedChange={setSelected}
+         options={options}/>
+      </Route>
+      <Route path="/translator"><Translator /></Route>
+      <Route path="/search"><Search /></Route>
     </div>
   )
 }
@@ -58,8 +55,37 @@ const App = _=> {
 export default App
 
 
+//Notes:
 
-//note:
-//we put selection state in the App component bc,
-//incase we wanted to have muiltple instances of DD component bd
-//the app might want to now what is selected in each component
+//Basic component rounting:
+//Below is an what components routing looked like before we decided to
+//build a route component
+
+// const showAccordion = () => {
+//   if(window.location.pathname === '/accordion') {
+//     return <Accordion items={questionsArr}/>;
+//   }
+// };
+
+// const showDropdown = () => {
+//   if(window.location.pathname === '/dropdown'){
+//     return  <DropDown
+//     selected={selected}
+//     onSelectedChange={setSelected}
+//     options={options}
+//   />
+//   }
+// };
+
+// const showTranslate = () =>{
+//   if(window.location.pathname === '/translator'){
+//      return   <Translator />
+//   }
+// };
+
+// const showSearch = () =>{
+//   if(window.location.pathname === '/search'){
+//      return   <Search />
+//   }
+// };
+

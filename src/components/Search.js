@@ -44,6 +44,7 @@ const Search = () => {
   let renderedResults = results.map(result=>{
    
     return term? (
+      
       <div key ={result.pageid} className="item">
         <div className="right floated content">
           <a className="ui button" 
@@ -60,7 +61,7 @@ const Search = () => {
 
 
   return (
-    <div>
+    <div className="ui container">
       <div className="ui form">
         <div className="field">
           <label>Enter Search Term</label>

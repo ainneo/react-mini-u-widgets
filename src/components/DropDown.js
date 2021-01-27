@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 
-const Dropdown = ({ label, options,  /*selected*/ languages, onSetLanguage }) => {
+const Dropdown = ({ label, options,  selected, onSelectedChange }) => {
 
   //state - open and close drop down
   const [open, setOpen] = useState(false);
@@ -21,7 +21,7 @@ const Dropdown = ({ label, options,  /*selected*/ languages, onSetLanguage }) =>
 
  //mapping data into UI
   const renderedOptions = options.map((option) => {
-    if (option.value ===  /*selected*/ languages.value) {
+    if (option.value ===  selected.value) {
       return null;
     }
 
@@ -29,7 +29,7 @@ const Dropdown = ({ label, options,  /*selected*/ languages, onSetLanguage }) =>
       <div
         key={option.value}
         className="item"
-        onClick={() => onSetLanguage(option)}
+        onClick={() => onSelectedChange(option)}
       >
         {option.label}
       </div>
@@ -38,6 +38,7 @@ const Dropdown = ({ label, options,  /*selected*/ languages, onSetLanguage }) =>
 
  // main UI component
   return (
+    <div className="ui container">
     <div ref={ref} className="ui form">
       <div className="field">
         <label className="label">{label}</label>
@@ -46,12 +47,13 @@ const Dropdown = ({ label, options,  /*selected*/ languages, onSetLanguage }) =>
           className={`ui selection dropdown ${open ? 'visible active' : ''}`}
         >
           <i className="dropdown icon"></i>
-          <div className="text">{ /*selected*/ languages.label}</div>
+          <div className="text">{ selected.label}</div>
           <div className={`menu ${open ? 'visible transition' : ''}`}>
             {renderedOptions}
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

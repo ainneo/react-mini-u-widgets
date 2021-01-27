@@ -32,7 +32,7 @@ const Translator = () =>{
 
     //UI
     return(
-        <div>
+        <div className="ui container">
           <div className="">
             <h3>Input</h3>
             <input
@@ -45,8 +45,8 @@ const Translator = () =>{
           <Dropdown
             label= "Select a language"
             options={options}
-            languages={language}
-            onSetLanguage={setlanguage}
+            selected={language}
+            onSelectedChange={setlanguage}
           />
           <hr />
           <h3 className="ui header">Output</h3>
