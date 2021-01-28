@@ -58,8 +58,29 @@ Use window.location in the console to locate the pathname.
 
 ### Navagation issues & fixes:
 Make sure pages making API calls is not reloading an entire index.html 
-file each time you click a link, check the network tab in your console
-The ideal fix:
+file each time you click a link, check the network tab in your console.
+Each time a link is clicked we completely reload the index.html file which is not ideal in a react application (its fine for static html sites). There is no reason for a react app to do a hard reload of all the assets.
+
+The ideal fix would be to, be able to click on a link, update the URL. but NOT do a full page reload. A full page reload causes a lot of network traffic that is not required to make small changes on the screen.
+User clicks on link:
+- change the URL, but don't do a full page refresh
+- each route could detect the URL has changed
+- route could update piece of state tracking the current pathname
+- each route rerenders, showing/hiding components approriately
+*** When ever we click on a react app link, we just DO NOT want to upload an entire page...
+*** See Header.js file for more on the fix
+
+Additonal notes:
+- Create a link component to be used inside the header component - replaces all <a> tags
+- Changing the URL - with ```window.history.pushState({}, '', href)```, test in console
+- Detecting Navagation - see Link and Route notes
+- Update Route - introducing a pc of state to render the matching URL & Route
+- Handing Common Clicks
+
+### Debug issues:
+ - TypeError: Cannot read property 'contains' of null
+
+
 
 
 

@@ -2,13 +2,19 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Search = () => {
-  //search term hook
-  const [term, setTerm] = useState('');
-  //results hook - to print out to the DOM
-  //unpack data using destructing asignment in the axios call
-  //pass data into setResults
+  const [term, setTerm] = useState('programming');
+  const [debouncedTerm, setDebouncedTerm] = useState(term);
   const [results, setResults] = useState([]);
 
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedTerm(term);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [term]);
 
   useEffect(() => {
     const search = async () => {
@@ -18,50 +24,36 @@ const Search = () => {
           list: 'search',
           origin: '*',
           format: 'json',
-          srsearch: term,
+          srsearch: debouncedTerm,
         },
       });
+
       setResults(data.query.search);
-      // console.log(data)
     };
-    //set default term w/if condtion, otherwise an error occurs
-    //if term is an empty string, do not search
-    //if term has input,  do a search
-    //wrap with setTimeout func to prevent api throtting/ use clearTimeout to reset time after keypress
-    const timeoutId = setTimeout( ()=> {
-      if(term){
-        search()
-      };
-    }, 500);
-    //resets timer after input
-    return ()=> {
-      return clearTimeout(timeoutId);
-    }
+    search();
+  }, [debouncedTerm]);
 
-  }, [term]);
-
-
-  let renderedResults = results.map(result=>{
-   
-    return term? (
-      
-      <div key ={result.pageid} className="item">
+  const renderedResults = results.map((result) => {
+    return (
+      <div key={result.pageid} className="item">
         <div className="right floated content">
-          <a className="ui button" 
-             href={`http://en.wikipedia.org?curid=${result.pageid}`}>read more</a>
+          <a
+            className="ui button"
+            href={`https://en.wikipedia.org?curid=${result.pageid}`}
+          >
+            Go
+          </a>
         </div>
         <div className="content">
           <div className="header">{result.title}</div>
           <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
         </div>
       </div>
-    ):(console.log("no results on page"))
-
+    );
   });
 
-
   return (
-    <div className="ui container">
+    <div>
       <div className="ui form">
         <div className="field">
           <label>Enter Search Term</label>
@@ -69,7 +61,7 @@ const Search = () => {
             value={term}
             onChange={(e) => setTerm(e.target.value)}
             className="input"
-          />  
+          />
         </div>
       </div>
       <div className="ui celled list">{renderedResults}</div>
@@ -78,6 +70,89 @@ const Search = () => {
 };
 
 export default Search;
+
+
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+
+// const Search = () => {
+//   //search term hook
+//   const [term, setTerm] = useState('coding');
+//   const [debouncedTerm, setDebouncedTerm] = useState(term);
+//   //results hook - to print out to the DOM
+//   //unpack data using destructing asignment in the axios call
+//   //pass data into setResults
+//   const [results, setResults] = useState([]);
+
+//     //set default term w/if condtion, otherwise an error occurs
+//     //if term is an empty string, do not search
+//     //if term has input,  do a search
+//     //wrap with setTimeout func to prevent api throtting/ use clearTimeout to reset time after keypress
+//   useEffect(() => {
+//     const timerId = setTimeout(() => {
+//       setDebouncedTerm(term);
+//     }, 1000);
+//      //resets timer after input
+//     return () => {
+//       clearTimeout(timerId);
+//     };
+//   }, [term]);
+
+//   useEffect(() => {
+//     const search = async () => {
+//       const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+//         params: {
+//           action: 'query',
+//           list: 'search',
+//           origin: '*',
+//           format: 'json',
+//           srsearch: debouncedTerm,
+//         },
+//       });
+
+//       setResults(data.query.search);
+//     };
+//     search();
+//   }, [debouncedTerm]);
+
+
+//   const renderedResults = results.map((result) => {
+//     return (
+//       <div key={result.pageid} className="item">
+//         <div className="right floated content">
+//           <a
+//             className="ui button"
+//             href={`https://en.wikipedia.org?curid=${result.pageid}`}
+//           >
+//             Go
+//           </a>
+//         </div>
+//         <div className="content">
+//           <div className="header">{result.title}</div>
+//           <span dangerouslySetInnerHTML={{ __html: result.snippet }}></span>
+//         </div>
+//       </div>
+//     );
+//   });
+
+//   return (
+//     <div>
+//       <div className="ui form">
+//         <div className="field">
+//           <label>Enter Search Term</label>
+//           <input
+//             value={term}
+//             onChange={(e) => setTerm(e.target.value)}
+//             className="input"
+//           />
+//         </div>
+//       </div>
+//       <div className="ui celled list">{renderedResults}</div>
+//     </div>
+//   );
+// };
+
+// export default Search;
 
 
 //Step 1

@@ -1,51 +1,78 @@
 import React, { useState } from 'react';
 
-
 const Accordion = ({ items }) => {
-    //state hooks
-    const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
 
-    //helper func - toggle function
-    //if activeindex strict equal to an index set it null else set it to index
-    const onTitleClick = (index) => {
-        // console.log('click', index)//test
-        // setActiveIndex(index)
-        setActiveIndex(activeIndex === index ? null : index);
-    };
+  const onTitleClick = (index) => {
+    setActiveIndex(index);
+  };
 
-
-    //mapping data into UI
-    const renderedItems = items.map((item, index) => {
-        //if index is equal to the activeIndex, then open that index else return empty string
-        //opens answers
-        const open = index === activeIndex? 'active' : '';
-
-        return (
-            <React.Fragment key={index}>
-                
-                <div className="title" onClick={_ => onTitleClick(index)}>
-                    <i className="dropdown icon"></i>
-                    {item.title}
-                </div>
-                <div className={`content ${open}`}>
-                    <p>{item.content}</p>
-                </div>
-            
-            </React.Fragment>
-        )
-    });
-
-    //JSX render
+  const renderedItems = items.map((item, index) => {
+    const active = index === activeIndex ? 'active' : '';
 
     return (
-    <div className="ui container">
-    <div className="ui styled accordion">
-        {renderedItems}
+      <React.Fragment key={item.title}>
+        <div className={`title ${active}`} onClick={() => onTitleClick(index)}>
+          <i className="dropdown icon"></i>
+          {item.title}
         </div>
-        </div>)
-}
+        <div className={`content ${active}`}>
+          <p>{item.content}</p>
+        </div>
+      </React.Fragment>
+    );
+  });
 
-export default Accordion
+  return <div className="ui styled accordion">{renderedItems}</div>;
+};
+
+export default Accordion;
+
+
+// const Accordion = ({ items }) => {
+//     //state hooks
+//     const [activeIndex, setActiveIndex] = useState(null);
+
+//     //helper func - toggle function
+//     //if activeindex strict equal to an index set it null else set it to index
+//     const onTitleClick = (index) => {
+//         // console.log('click', index)//test
+//         setActiveIndex(index)
+//     };
+
+
+//     //mapping data into UI
+//     const renderedItems = items.map((item, index) => {
+//         //if index is equal to the activeIndex, then open that index else return empty string
+//         //opens answers
+//         const open = index === activeIndex? 'active' : '';
+
+//         return (
+//             <React.Fragment key={index}>
+                
+//                 <div className="title" onClick={_ => onTitleClick(index)}>
+//                     <i className="dropdown icon"></i>
+//                     {item.title}
+//                 </div>
+//                 <div className={`content ${open}`}>
+//                     <p>{item.content}</p>
+//                 </div>
+            
+//             </React.Fragment>
+//         )
+//     });
+
+//     //JSX render
+
+//     return (
+//     <div className="ui container">
+//     <div className="ui styled accordion">
+//         {renderedItems}
+//         </div>
+//         </div>)
+// }
+
+// export default Accordion
 
 
 //**** how to toggle - open and close

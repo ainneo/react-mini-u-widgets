@@ -1,58 +1,68 @@
+import React, { useState } from 'react';
 import Accordion from './components/Accordion';
 import Search from './components/Search';
-import DropDown from './components/DropDown';
-import Translator from './components/Translator';
+import Dropdown from './components/Dropdown';
+import Translate from './components/Translate';
 import Route from './components/Route';
 import Header from './components/Header';
-import './App.css';
-import React, { useState } from 'react';
- 
 
-const App = _=> {
-// questions array
-const questionsArr = [
-  {title:'What is the questionsArr?', content:'it is a static array we created - will not change'},
-  {title:'How do we pass questionsArr down as props?', content:'We add items={questionsArr} to the Accordion instance'},
-  {title:'What function can we use to add props to the UI?', content:'We can use the map function'},
+const items = [
+  {
+    title: 'What is React?',
+    content: 'React is a front end javascript framework',
+  },
+  {
+    title: 'Why use React?',
+    content: 'React is a favorite JS library among engineers',
+  },
+  {
+    title: 'How do you use React?',
+    content: 'You use React by creating components',
+  },
 ];
 
-//color array
 const options = [
   {
     label: 'The Color Red',
-    value: 'red'
+    value: 'red',
   },
   {
-    label: 'The Color Blue',
-    value: 'blue'
-  },  
-  {
     label: 'The Color Green',
-    value: 'green'
-  }
+    value: 'green',
+  },
+  {
+    label: 'A Shade of Blue',
+    value: 'blue',
+  },
 ];
 
-//color state to show the selection in the label
-const [selected, setSelected] = useState(options[0]);
+export default () => {
+  const [selected, setSelected] = useState(options[0]);
 
-  return(
+  return (
     <div>
       <Header />
-      <Route path="/accordion"><Accordion items={questionsArr}/></Route>
-      <Route path="/dropdown">
-        <DropDown
-         label= "select a color"
-         selected={selected}
-         onSelectedChange={setSelected}
-         options={options}/>
+      <Route path="/">
+        <Accordion items={items} />
       </Route>
-      <Route path="/translator"><Translator /></Route>
-      <Route path="/search"><Search /></Route>
+      <Route path="/list">
+        <Search />
+      </Route>
+      <Route path="/dropdown">
+        <Dropdown
+          label="Select a color"
+          options={options}
+          selected={selected}
+          onSelectedChange={setSelected}
+        />
+      </Route>
+      <Route path="/translate">
+        <Translate />
+      </Route>
     </div>
-  )
-}
+  );
+};
 
-export default App
 
 
 //Notes:
