@@ -1,8 +1,7 @@
 # Description
-This project is a mini library of react hooks components. The library consists of a search bar, language translator, nav bar, drop down menu, and an accordian modal.
+This project is a mini library of react hooks components. The library consists of a search bar, language translator, nav bar, drop down menu, and an accordian modal. None of these components are related. The reason all the widgets are in the same app is so we don't have to generate CRA template over and over again for each widget
 
 ## Available Scripts
-
 In the project directory, you can run:
 
 ### `npm start`
@@ -15,12 +14,8 @@ You will also see any lint errors in the console.
 
 ### Styles 
 No additonal css needed, only add classes to the HTML markup - add classes via Sematic UI DOCs
-Created styles using Sematic UI. Use CDN: https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css
+Create styles using Sematic UI. Use CDN: https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css
 You can run a search for other Sematic UI CDNs here: https://cdnjs.com/libraries/semantic-ui and read documentations here: https://semantic-ui.com/
-
-
-### About This Project:
-This is a fun mini app of 4 widgets, an accordian, search bar, translator, and drop down menu. None of these widgets are related. The reason all the widgets are in the same app is so we don't have to generate CRA template over and over again for each widget
 
 ### API CALL
 API call for search wiki is made with axios. Install via CLI:
