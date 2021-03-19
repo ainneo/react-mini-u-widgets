@@ -1,4 +1,4 @@
-# Description
+## Description
 This project is a mini library of react hooks components. The library consists of a search bar, language translator, nav bar, drop down menu, and an accordian modal. None of these components are related. The reason all the widgets are in the same app is so we don't have to generate CRA template over and over again for each widget
 
 ## Available Scripts
